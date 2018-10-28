@@ -1,0 +1,17 @@
+<!-- -->
+<launch>
+    <node pkg="fix2pose" type="fix2tfpose" name="filter_pose" ns="gps_imu" output="screen">
+        <param name="topic_pose" value="/gps_imu_filter"/>
+		<param name="topic_gps" value="/gps/fix"/>
+        <param name="frame_id" value="/gps_imu_filter"/>
+		<param name="topic_yaw" value="/gps/heading"/>
+    </node>
+    <node pkg="fix2pose" type="pose2path" name="filter_path" ns="gps_imu" output="screen">
+        <param name="pose_name" type="string" value="/gps_imu_filter"/>
+        <param name="path_name" type="string" value="/gps_imu_filter_path"/>
+        <param name="gps_name" type="string" value="/gps/fix"/>
+   
+    </node>
+
+  
+</launch>

@@ -1,0 +1,52 @@
+<launch>
+
+
+
+  <arg name="rviz" default="true" />
+<!--GPS filter-->
+   <node pkg="pose_fusion" type="filter" name="filter" ns="strong" output="screen" >
+        <!-- topic name setup -->
+        <param name="gps_input_topic" type="string" value="fix"/>
+        <param name="gps_heading_topic" type="string" value="attitude"/>
+        <param name="gps_raw_topic" type="string" value="raw_data"/>
+        <param name="imu_input_topic" type="string" value="/vehicle/imu"/>
+        <param name="encoder_input_topic" type="string" value="/vehicle/speed_feedback"/>
+        <param name="gps_output_topic" type="string" value="/gps_filtered"/>
+        <param name="yaw_output_topic" type="string" value="/yaw_filtered"/>
+        <param name="encoder_input_frequency" type="double" value="100"/>
+        <param name="gps_input_frequency" type="double" value="10"/>
+        <param name="imu_input_frequency" type="double" value="100"/>
+        <!-- ***********the frequency of gps and yaw output************* -->
+        <param name="output_frequency" type="double" value="100"/>
+        <!-- *********************************************************** -->
+        <!-- sensor error setup -->
+        <!-- error of GPS(state:4) 0.008m -->
+        <param name="GPS_error_fix" type="double" value="0.008"/>
+        <!-- error of GPS(state: 5) 1m -->
+        <param name="GPS_error_float" type="double" value="1.0"/>
+        <!-- error of GPS(state: 1) 3m -->
+        <param name="GPS_error_single" type="double" value="3.0"/>
+        <param name="imu_angular_velocity_error" type="double" value="0.0015"/>
+        <param name="encoder_error" type="double" value="0.03"/>
+        <param name="GPS_yaw_estimation_error" type="double" value="0.0035"/>
+        <!--0.l0035-->
+      </node>
+<!--GPS to plane-->
+   <node pkg="gps_to_plane" type="gps_to_plane" name="gps_to_plane" output="screen"/>
+<!--LOAM-->
+  <node pkg="loam_velodyne" type="scanRegistration" name="scanRegistration" output="screen"/>
+
+  <node pkg="loam_velodyne" type="laserOdometry" name="laserOdometry" output="screen" respawn="true">
+  </node>
+
+  <node pkg="loam_velodyne" type="laserMapping" name="laserMapping" output="screen"/>
+  <!--node pkg="loam_velodyne" type="closeConstraint" name="closeConstraint" output="screen"/-->
+  <node pkg="loam_velodyne" type="transformMaintenance" name="transformMaintenance" output="screen"/>
+
+  <group if="$(arg rviz)">
+    <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find loam_velodyne)/rviz_cfg/loam_velodyne.rviz" />
+  </group>
+
+      
+
+</launch>

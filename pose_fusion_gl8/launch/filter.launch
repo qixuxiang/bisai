@@ -1,0 +1,5 @@
+<!-- -->
+<launch>
+    <node pkg="pose_fusion" type="filter_all" name="filter_all" ns="strong" output="screen">
+    </node>
+</launch>

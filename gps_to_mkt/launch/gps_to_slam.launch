@@ -1,0 +1,9 @@
+<!-- -->
+<launch>
+    <node pkg="gps_to_mkt" type="mktfix2tfpose" name="mktfilter_pose" output="screen">
+        <param name="topic_pose" value="/gps_pose"/>
+		<param name="topic_gps" value="/gps_filtered"/>
+        <param name="frame_id" value="/gps_filter"/>
+		<param name="topic_yaw" value="/yaw_filtered"/>
+    </node>
+</launch>

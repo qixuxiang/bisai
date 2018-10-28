@@ -1,0 +1,25 @@
+<!-- -->
+<launch>
+    <node pkg="fix2pose" type="fix2tfpose" name="filter_pose" ns="slam_filter" output="screen">
+        <param name="topic_pose" value="/slam_filter"/>
+		<param name="topic_gps" value="/slam_pose"/>
+        <param name="frame_id" value="/slam_filter"/>
+		<param name="topic_yaw" value="/slam_yaw"/>
+    </node>
+
+   <node pkg="fix2pose" type="fix2tfpose" name="filter_pose" ns="slam_" output="screen">
+        <param name="topic_pose" value="/slam"/>
+		<param name="topic_gps" value="/pose_gps"/>
+        <param name="frame_id" value="/slam"/>
+		<param name="topic_yaw" value="/yaw_gps"/>
+    </node>
+
+  <node pkg="fix2pose" type="fix2tfpose" name="filter_pose" output="screen">
+        <param name="topic_pose" value="/gps_filter"/>
+		<param name="topic_gps" value="/gps_filtered"/>
+        <param name="frame_id" value="/gps_filter"/>
+		<param name="topic_yaw" value="/yaw_filtered"/>
+    </node>
+
+  
+</launch>

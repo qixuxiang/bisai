@@ -1,0 +1,14 @@
+<launch>
+    <node pkg="gps_to_plane" type="gps_to_plane" name="gps_to_plane" ns="gps_pose" output="screen" >
+        <!-- topic name setup -->
+        <param name="gps_input_topic" type="string" value="/Inertial/gps/fix"/>
+        <param name="gps_heading_topic" type="string" value="/gps/heading"/>
+        <param name="gps_pose_output_topic" type="string" value="/gps_pose"/>
+    </node>
+    <node pkg="gps_to_plane" type="gps_to_plane" name="gps_to_plane" ns="slam_pose" output="screen" >
+        <!-- topic name setup -->
+        <param name="gps_input_topic" type="string" value="/slam_pose"/>
+        <param name="gps_heading_topic" type="string" value="/slam_yaw"/>
+        <param name="gps_pose_output_topic" type="string" value="/slam_filter_pose_guess"/>
+    </node>
+</launch>

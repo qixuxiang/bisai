@@ -1,0 +1,17 @@
+<!-- -->
+<launch>
+    <node pkg="fix2pose" type="fix2tfpose" name="filter_pose" output="screen">
+        <param name="topic_pose" value="/gps_filter"/>
+		<param name="topic_gps" value="/gps_filtered"/>
+        <param name="frame_id" value="/gps_filter"/>
+		<param name="topic_yaw" value="/yaw_filtered"/>
+    </node>
+    <node pkg="fix2pose" type="pose2path" name="filter_path" output="screen">
+        <param name="pose_name" type="string" value="/gps_filter"/>
+        <param name="path_name" type="string" value="/gps_filter_path"/>
+        <param name="gps_name" type="string" value="/gps_filtered"/>
+        <param name="point_marker_type" type="int" value="6"/>
+        <param name="id" type="int" value="100"/>
+        <param name="display_type" type="int" value="2"/>
+    </node>
+</launch>

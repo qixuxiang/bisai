@@ -1,0 +1,18 @@
+<!-- -->
+<launch>
+    <node pkg="fix2pose" type="fix2tfpose" name="filter_pose" ns="slam_filter" output="screen">
+        <param name="topic_pose" value="/slam_filter"/>
+		<param name="topic_gps" value="/slam_pose"/>
+        <param name="frame_id" value="/slam_filter"/>
+		<param name="topic_yaw" value="/slam_yaw"/>
+    </node>
+    <node pkg="fix2pose" type="pose2path" name="filter_path" ns="slam_filter" output="screen">
+        <param name="pose_name" type="string" value="/slam_filter"/>
+        <param name="path_name" type="string" value="/slam_filter_path"/>
+        <param name="gps_name" type="string" value="/slam_pose"/>
+        <param name="point_marker_type" type="int" value="6"/>
+        <param name="id" type="int" value="101"/>
+        <param name="display_type" type="int" value="2"/>
+    </node>
+  
+</launch>

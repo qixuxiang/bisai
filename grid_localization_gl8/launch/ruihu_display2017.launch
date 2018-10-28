@@ -1,0 +1,12 @@
+<!--
+-->
+
+<launch>
+  <param name="robot_description"
+    textfile="/home/hl/gl8_ws/src/localization/grid_localization_gl8/ruihu2017.urdf" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
+    type="robot_state_publisher" />
+    <node name="rviz" pkg="rviz" type="rviz" required="true"
+    args="-d /home/hl/gl8_ws/src/localization/grid_localization_gl8/gl8.rviz" />
+</launch>
